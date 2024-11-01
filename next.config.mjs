@@ -9,7 +9,11 @@ const nextConfig = {
             {
                 protocol: 'https',
                 hostname: 'colorful-marmot-201.convex.cloud',
-            }
+            },
+            {
+                protocol: 'https',
+                hostname: 'img.clerk.com'
+            },
             
         ]
     }

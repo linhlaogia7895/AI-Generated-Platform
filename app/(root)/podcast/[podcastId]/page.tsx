@@ -1,10 +1,10 @@
 
 'use client'
 
-//import EmptyState from '@/components/EmptyState'
-//import LoaderSpinner from '@/components/LoaderSpinner'
-//import PodcastCard from '@/components/PodcastCard'
-//import PodcastDetailPlayer from '@/components/PodcastDetailPlayer'
+import LoaderSpinner from '@/components/LoaderSpinner'
+import PodcastDetailPlayer from '@/components/PodcastDetailPlayer'
+import EmptyState from '@/components/EmptyState'
+import PodcastCard from '@/components/PodcastCard'
 import { api } from '@/convex/_generated/api'
 import { Id } from '@/convex/_generated/dataModel'
 import { useUser } from '@clerk/nextjs'
@@ -21,7 +21,7 @@ const PodcastDetails = ({ params: { podcastId } }: { params: { podcastId: Id<'po
 
   const isOwner = user?.id === podcast?.authorId;
 
-  //if(!similarPodcasts || !podcast) return <LoaderSpinner />
+  if(!similarPodcasts || !podcast) return <LoaderSpinner />
 
   return (
     <section className="flex w-full flex-col">
@@ -40,11 +40,11 @@ const PodcastDetails = ({ params: { podcastId } }: { params: { podcastId: Id<'po
         </figure>
       </header>
 
-      {/* <PodcastDetailPlayer 
+      <PodcastDetailPlayer 
         isOwner={isOwner}
         podcastId={podcast._id}
         {...podcast}
-      /> */}
+      />
 
       <p className="text-white-2 text-16 pb-8 pt-[45px] font-medium max-md:text-center">{podcast?.podcastDescription}</p>
 
@@ -63,7 +63,7 @@ const PodcastDetails = ({ params: { podcastId } }: { params: { podcastId: Id<'po
 
         {similarPodcasts && similarPodcasts.length > 0 ? (
           <div className="podcast_grid">
-            {/* {similarPodcasts?.map(({ _id, podcastTitle, podcastDescription, imageUrl }) => (
+            {similarPodcasts?.map(({ _id, podcastTitle, podcastDescription, imageUrl }) => (
               <PodcastCard 
                 key={_id}
                 imgUrl={imageUrl as string}
@@ -71,15 +71,15 @@ const PodcastDetails = ({ params: { podcastId } }: { params: { podcastId: Id<'po
                 description={podcastDescription}
                 podcastId={_id}
               />
-            ))} */}
+            ))}
           </div>
         ) : (
           <> 
-            {/* <EmptyState 
+            <EmptyState 
               title="No similar podcasts found"
               buttonLink="/discover"
               buttonText="Discover more podcasts"
-            /> */}
+            />
           </>
         )}
       </section>
