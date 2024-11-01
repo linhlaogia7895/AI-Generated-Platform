@@ -8,13 +8,13 @@ import { usePathname, useRouter } from 'next/navigation'
 import React from 'react'
 import { Button } from './ui/button';
 import { SignedIn, SignedOut, useClerk } from '@clerk/nextjs';
-//import { useAudio } from '@/providers/AudioProvider';
+import { useAudio } from '@/providers/AudioProvider';
 
 const LeftSidebar = () => {
   const pathname = usePathname();
   const router = useRouter();
   const { signOut } = useClerk();
-  //const { audio } = useAudio();
+  const { audio } = useAudio();
 
   return (
     <section className="left_sidebar ">
@@ -28,7 +28,7 @@ const LeftSidebar = () => {
           const isActive = pathname === route || pathname.startsWith(`${route}/`);
 
           return <Link href={route} key={label} className={cn("flex gap-3 items-center py-4 max-lg:px-4 justify-center lg:justify-start", {
-            'bg-nav-focus border-r-4 border-orange-1': isActive
+            'bg-nav-focus border-r-4 border-blue-1': isActive
           })}>
             <Image src={imgURL} alt={label} width={24} height={24} />
             <p>{label}</p>
@@ -37,14 +37,14 @@ const LeftSidebar = () => {
       </nav>  
       <SignedOut>
         <div className="flex-center w-full pb-14 max-lg:px-4 lg:pr-8">
-          <Button asChild className="text-16 w-full bg-orange-1 font-extrabold">
+          <Button asChild className="text-16 w-full bg-blue-1 font-extrabold">
             <Link href="/sign-in">Sign in</Link>
           </Button>
         </div>
       </SignedOut>
       <SignedIn>
         <div className="flex-center w-full pb-14 max-lg:px-4 lg:pr-8">
-          <Button className="text-16 w-full bg-orange-1 font-extrabold" onClick={() => signOut(() => router.push('/'))}>
+          <Button className="text-16 w-full bg-blue-1 font-extrabold" onClick={() => signOut(() => router.push('/'))}>
             Log Out
           </Button>
         </div>
